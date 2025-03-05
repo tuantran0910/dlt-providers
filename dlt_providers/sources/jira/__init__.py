@@ -13,7 +13,7 @@ from dlt.sources.rest_api import RESTAPIConfig, rest_api_resources
 from .settings import DEFAULT_START_DATE, REST_API_BASE_URL
 
 
-@dlt.source(max_table_nesting=1)
+@dlt.source(max_table_nesting=0)
 def jira(
     subdomain: str = dlt.secrets.value,
     email: str = dlt.secrets.value,
@@ -48,6 +48,7 @@ def jira(
         "resources": [
             {
                 "name": "issues",
+                "max_table_nesting": 1,
                 "write_disposition": "merge",
                 "primary_key": "id",
                 "endpoint": {
