@@ -65,27 +65,9 @@ def jira(
                     },
                     "params": {
                         "fields": "*all",
-                        "expand": "renderedFields",
+                        "expand": "renderedFields,changelog",
                     },
                 },
-            },
-            {
-                "name": "issue_changelogs",
-                "write_disposition": "merge",
-                "primary_key": "id",
-                "endpoint": {
-                    "path": "/rest/api/3/issue/{issue_id}/changelog",
-                    "paginator": JSONLinkPaginator(next_url_path="nextPage"),
-                    "data_selector": "values",
-                    "params": {
-                        "issue_id": {
-                            "type": "resolve",
-                            "resource": "issues",
-                            "field": "id",
-                        }
-                    },
-                },
-                "include_from_parent": ["id"],
             },
             {
                 "name": "issue_fields",
